@@ -3,6 +3,7 @@ import { User } from "../models/user";
 
 import { body, validationResult } from "express-validator";
 import { RequestValidationError } from "../errors/request-validation-errors";
+import { BadRequestError } from "../errors/bad-request-error";
 
 const router = express.Router();
 
@@ -26,7 +27,7 @@ router.post(
 
     if (existingUser) {
       console.log("Email is taken");
-      return res.send({});
+      throw new BadRequestError("Email has been already registered");
     }
 
     const user = User.build({

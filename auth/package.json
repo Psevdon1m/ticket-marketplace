@@ -12,6 +12,7 @@
   "type": "commonjs",
   "dependencies": {
     "@types/express": "^5.0.3",
+    "@types/mongoose": "^5.11.96",
     "express": "^5.1.0",
     "express-validator": "^7.2.1",
     "mongoose": "^8.16.4",

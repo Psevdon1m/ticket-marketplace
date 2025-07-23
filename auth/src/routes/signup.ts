@@ -38,12 +38,13 @@ router.post(
     await user.save();
 
     //genrerate jwt
+
     const userJwt = jwt.sign(
       {
         id: user.id,
         email: user.email,
       },
-      "1234"
+      process.env.JWT_KEY! //checked in index.js before app launched
     );
 
     //store it onn seession

@@ -1,25 +1,24 @@
 "use client";
 import { useState } from "react";
 import axios from "axios";
+import useRequest from "@/hooks/use-request";
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState([]);
-
+  const { doRequest, errors } = useRequest({
+    url: "/api/users/signup",
+    method: "post",
+    body: {
+      email,
+      password,
+    },
+  });
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
-      try {
-        let res = await axios.post("/api/users/signup", {
-          email,
-          password,
-        });
-        console.log(res);
-      } catch (error) {
-        setErrors(error.response.data.errors);
-      }
+      doRequest();
     } else {
       alert("Passwords do not matchc");
     }
@@ -64,18 +63,7 @@ export default function SignupPage() {
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-700"
           />
         </div>
-        {errors.length > 0 && (
-          <div>
-            <h3 className="text-red-500 text-sm font-bold">Errors</h3>
-            <ul>
-              {errors.map((error) => (
-                <li key={error.field} className="text-red-500 list-disc ml-4">
-                  {error.message}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        {errors}
         <button
           type="submit"
           className="w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700 transition-colors"

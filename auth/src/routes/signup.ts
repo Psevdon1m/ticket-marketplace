@@ -25,7 +25,6 @@ router.post(
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
-      console.log("Email is taken");
       throw new BadRequestError("Email has been already registered");
     }
 

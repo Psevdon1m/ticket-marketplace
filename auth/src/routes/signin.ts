@@ -1,9 +1,18 @@
 import express from "express";
+import { body } from "express-validator";
+import type { Request, Response } from "express";
+import { validateRequest } from "../middlewares/validate-request";
 
 const router = express.Router();
 
-router.post("/api/users/signin", (req, res) => {
-  res.send("Hello server: signin");
-});
+router.post(
+  "/api/users/signin",
+  [
+    body("email").isEmail().withMessage("Email must be valid"),
+    body("password").trim().notEmpty().withMessage("Password is required"),
+  ],
+  validateRequest,
+  (req: Request, res: Response) => {}
+);
 
 export { router as signinRouter };

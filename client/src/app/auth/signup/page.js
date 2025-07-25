@@ -1,12 +1,13 @@
 "use client";
 import { useState } from "react";
-import axios from "axios";
-import useRequest from "@/hooks/use-request";
+import { useRouter } from "next/navigation";
+import useRequest from "../../../../hooks/use-request";
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const router = useRouter();
   const { doRequest, errors } = useRequest({
     url: "/api/users/signup",
     method: "post",
@@ -14,11 +15,14 @@ export default function SignupPage() {
       email,
       password,
     },
+    onSuccess: () => {
+      router.push("/");
+    },
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
-      doRequest();
+      await doRequest();
     } else {
       alert("Passwords do not matchc");
     }

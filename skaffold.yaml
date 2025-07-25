@@ -18,4 +18,11 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
- 
+    - image: us.gcr.io/ticket-marketplace-466518/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '**/*.js'
+            dest: .

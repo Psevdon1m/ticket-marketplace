@@ -1,8 +1,13 @@
-FROM node:alpine
+FROM node:18
 
 WORKDIR /app
-COPY package.json .
+
+COPY package*.json ./
 RUN npm install
+
 COPY . .
 
-CMD ["npm","run","dev"]
+# for dev only!
+ENV NODE_TLS_REJECT_UNAUTHORIZED=0
+
+CMD ["npm", "run", "dev"]

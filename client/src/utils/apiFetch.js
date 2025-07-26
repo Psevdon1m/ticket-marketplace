@@ -20,8 +20,8 @@ export function getServiceBaseUrl(service) {
   return SERVICE_BASE_URLS[service];
 }
 
-export function getSessionCookie() {
-  const cookieStore = cookies();
+export async function getSessionCookie() {
+  const cookieStore = await cookies();
   const sessionCookie = cookieStore.get("session");
   return sessionCookie ? `session=${sessionCookie.value}` : "";
 }
@@ -34,7 +34,7 @@ export function getSessionCookie() {
  */
 export async function apiFetch(service, path, options = {}) {
   const baseURL = getServiceBaseUrl(service);
-  const cookieString = getSessionCookie();
+  const cookieString = await getSessionCookie();
 
   const headers = {
     Host: "ticket-marketplace.dev",
@@ -44,6 +44,8 @@ export async function apiFetch(service, path, options = {}) {
   };
 
   try {
+    console.log("fetching api: ", path);
+
     const res = await fetch(`${baseURL}${path}`, {
       ...options,
       headers,

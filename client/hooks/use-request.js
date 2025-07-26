@@ -14,6 +14,7 @@ export default ({ url, method, body, onSuccess }) => {
 
       return res.data;
     } catch (error) {
+      console.log(error);
       setErrors(
         <div>
           <h3 className="text-red-500 text-sm font-bold">Errors</h3>

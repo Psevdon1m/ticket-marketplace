@@ -5,14 +5,14 @@ import useRequest from "../../../hooks/use-request";
 const UserContext = createContext(null);
 
 export function UserProvider({ children, user }) {
-  const [state, setState] = useState(user);
-  const { doRequest, errors } = useRequest({
-    url: "/api/users/currentuser",
-    method: "get",
-    onSuccess: (data) => {
-      setState(data);
-    },
-  });
+  const [state, setState] = useState({ currentUser: user });
+  //   const { doRequest, errors } = useRequest({
+  //     url: "/api/users/currentuser",
+  //     method: "get",
+  //     onSuccess: (data) => {
+  //       setState(data);
+  //     },
+  //   });
 
   const login = (data) => {
     console.log("setting user: ", data);
@@ -25,10 +25,10 @@ export function UserProvider({ children, user }) {
     setState({ currentUser: null });
   };
 
-  useEffect(() => {
-    // Refresh user on client if needed
-    doRequest();
-  }, []);
+  //   useEffect(() => {
+  //     // Refresh user on client if needed
+  //     doRequest();
+  //   }, []);
 
   return (
     <UserContext.Provider value={{ state, login, logout }}>

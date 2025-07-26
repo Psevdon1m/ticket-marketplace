@@ -7,6 +7,7 @@ export default ({ url, method, body, onSuccess }) => {
   const doRequest = async () => {
     try {
       setErrors(null);
+      console.log("fetching api: ", url);
       let res = await axios[method](url, body);
       if (onSuccess) {
         onSuccess(res.data);

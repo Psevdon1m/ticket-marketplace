@@ -29,7 +29,7 @@ export default async function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <UserProvider state={currentUser}>
+        <UserProvider user={currentUser}>
           <Header user={currentUser} />
           {children}
         </UserProvider>

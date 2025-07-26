@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import express from "express";
 
-import { currentUser } from "../middlewares/current-user";
+import { currentUser } from "@ticketsvo/common";
 
 const router = express.Router();
 

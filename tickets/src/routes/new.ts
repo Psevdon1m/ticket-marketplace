@@ -16,19 +16,15 @@ router.post(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    let ticket;
-    try {
-      const { title, price } = req.body;
+    const { title, price } = req.body;
 
-      ticket = Ticket.build({
-        title,
-        price,
-        userId: req.currentUser!.id,
-      });
-      await ticket.save();
-    } catch (error) {
-      console.log(error);
-    }
+    let ticket = Ticket.build({
+      title,
+      price,
+      userId: req.currentUser!.id,
+    });
+    await ticket.save();
+
     res.status(201).send(ticket);
   }
 );

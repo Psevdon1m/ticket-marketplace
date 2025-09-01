@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: client
-          image: us.gcr.io/ticket-marketplace-466518/client
+          image: psevdon1m/client
           env:
             - name: NODE_TLS_REJECT_UNAUTHORIZED
               value: "0"
@@ -31,3 +31,4 @@ spec:
       protocol: TCP
       port: 3000
       targetPort: 3000
+  type: ClusterIP

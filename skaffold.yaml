@@ -5,12 +5,12 @@ deploy:
     manifests:
       - ./infra/k8s/*
 build:
-  # local:  
-  #   push: false
-  googleCloudBuild: 
-    projectId: ticket-marketplace-466518
+  local:  
+    push: false
+  # googleCloudBuild: 
+  #   projectId: ticket-marketplace-466518
   artifacts:
-    - image: us.gcr.io/ticket-marketplace-466518/auth
+    - image: psevdon1m/auth
       context: auth
       docker:
         dockerfile: Dockerfile
@@ -18,7 +18,7 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: us.gcr.io/ticket-marketplace-466518/client
+    - image: psevdon1m/client
       context: client
       docker:
         dockerfile: Dockerfile
@@ -26,7 +26,7 @@ build:
         manual:
           - src: '**/*.js'
             dest: .
-    - image: us.gcr.io/ticket-marketplace-466518/tickets
+    - image: psevdon1m/tickets
       context: tickets
       docker:
         dockerfile: Dockerfile
